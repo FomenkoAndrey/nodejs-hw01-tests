@@ -29,22 +29,20 @@ console.log('#53. JavaScript homework example file')
 
 // Функції для кодування даних з довільною кількістю аргументів
 function encodeToBase64(...args) {
-  const combinedString = args.join(':')
-  return Buffer.from(combinedString).toString('base64')
+  // code here
 }
 
 function encodeToHex(...args) {
-  const combinedString = args.join(':')
-  return Buffer.from(combinedString).toString('hex')
+  // code here
 }
 
 // Функції для декодування даних
 function decodeFromBase64(base64String) {
-  return Buffer.from(base64String, 'base64').toString('utf-8')
+  // code here
 }
 
 function decodeFromHex(hexString) {
-  return Buffer.from(hexString, 'hex').toString('utf-8')
+  // code here
 }
 
 // ! Приклад використання:
@@ -88,17 +86,11 @@ function decodeFromHex(hexString) {
  */
 
 function safeDecodeFromBase64(base64String) {
-  if (!/^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(base64String)) {
-    throw new Error('Invalid base64 string')
-  }
-  return Buffer.from(base64String, 'base64').toString('utf-8')
+  // code here
 }
 
 function safeDecodeFromHex(hexString) {
-  if (!/^[0-9a-fA-F]+$/.test(hexString)) {
-    throw new Error('Invalid hex string')
-  }
-  return Buffer.from(hexString, 'hex').toString('utf-8')
+  // code here
 }
 
 // ! Приклад використання:
