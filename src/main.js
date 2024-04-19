@@ -6,6 +6,34 @@ console.log('#53. JavaScript homework example file')
  *
  * Функціональні вимоги:
  * 1. Вхідні параметри:
+ *  - Не потребує вхідних параметрів.
+ *
+ * 2. Визначення режиму відладки:
+ *  - Функція `isDebugMode()` перевіряє значення змінної середовища `NODE_ENV`.
+ *  - Повертає `true`, якщо `NODE_ENV` дорівнює 'development'.
+ *  - Повертає `false`, якщо `NODE_ENV` має будь-яке інше значення або не встановлено.
+ *
+ * 3. Логування:
+ *  - Логування поверненого значення у консоль перед завершенням функції.
+ *  - Опційно, логування поточного значення `NODE_ENV` для кращого розуміння стану середовища.
+ *
+ * Технічні вимоги:
+ * - Строга перевірка рівності використовуючи оператор `===`.
+ * - Запис функції має бути виконаний з використанням стрілкової функції для підтримки сучасних стандартів ES6+.
+ * - Код має бути написаний чисто і чітко, з урахуванням потенційних розширень для додаткових перевірок середовища.
+ *
+ */
+
+function isDebugMode() {
+  return process.env.NODE_ENV === 'development'
+}
+
+/*
+ *
+ * #2
+ *
+ * Функціональні вимоги:
+ * 1. Вхідні параметри:
  *  - Довільна кількість рядків як параметри функцій.
  *
  * 2. Операції кодування:
@@ -62,7 +90,7 @@ function decodeFromHex(hexString) {
 
 /*
  *
- * #2
+ * #3
  *
  * Функціональні вимоги:
  * 1. Вхідні параметри:
@@ -108,4 +136,12 @@ function safeDecodeFromHex(hexString) {
 // const safeHexDecoded = safeDecodeFromHex(hexEncoded)
 // console.log('Safe Hex Decoded:', safeHexDecoded)
 
-export { encodeToBase64, encodeToHex, decodeFromBase64, decodeFromHex, safeDecodeFromBase64, safeDecodeFromHex }
+export {
+  isDebugMode,
+  encodeToBase64,
+  encodeToHex,
+  decodeFromBase64,
+  decodeFromHex,
+  safeDecodeFromBase64,
+  safeDecodeFromHex
+}
