@@ -1,4 +1,4 @@
-import { decodeFromBase64, decodeFromHex, encodeToBase64, encodeToHex } from '../main.js'
+import { safeDecodeFromBase64, safeDecodeFromHex } from '../main.js'
 
 let originalConsoleError // Визначаємо змінну в області видимості, доступній для обох хуків
 let originalConsoleLog // Визначаємо змінну в області видимості, доступній для обох хуків
@@ -18,26 +18,24 @@ afterEach(() => {
   console.log = originalConsoleLog // Відновлюємо console.log
 })
 
-describe('Encoder and Decoder Functions', () => {
-  test('encodeToBase64 correctly encodes multiple arguments', () => {
-    const result = encodeToBase64('hello', 'world')
-    expect(result).toBe(Buffer.from('hello:world').toString('base64'))
+describe('Safe Decoder Functions', () => {
+  test('safeDecodeFromBase64 correctly decodes a valid base64 string', () => {
+    const validBase64 = Buffer.from('hello:world').toString('base64')
+    expect(safeDecodeFromBase64(validBase64)).toBe('hello:world')
   })
 
-  test('encodeToHex correctly encodes multiple arguments', () => {
-    const result = encodeToHex('hello', 'world')
-    expect(result).toBe(Buffer.from('hello:world').toString('hex'))
+  test('safeDecodeFromBase64 throws error on invalid base64 input', () => {
+    const invalidBase64 = 'not*valid*base64'
+    expect(() => safeDecodeFromBase64(invalidBase64)).toThrow('Invalid base64 string')
   })
 
-  test('decodeFromBase64 correctly decodes a base64 string', () => {
-    const base64String = Buffer.from('hello:world').toString('base64')
-    const result = decodeFromBase64(base64String)
-    expect(result).toBe('hello:world')
+  test('safeDecodeFromHex correctly decodes a valid hex string', () => {
+    const validHex = Buffer.from('hello:world').toString('hex')
+    expect(safeDecodeFromHex(validHex)).toBe('hello:world')
   })
 
-  test('decodeFromHex correctly decodes a hex string', () => {
-    const hexString = Buffer.from('hello:world').toString('hex')
-    const result = decodeFromHex(hexString)
-    expect(result).toBe('hello:world')
+  test('safeDecodeFromHex throws error on invalid hex input', () => {
+    const invalidHex = 'notHex'
+    expect(() => safeDecodeFromHex(invalidHex)).toThrow('Invalid hex string')
   })
 })

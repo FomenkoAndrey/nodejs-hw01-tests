@@ -1,4 +1,4 @@
-import { decodeFromBase64, decodeFromHex, encodeToBase64, encodeToHex } from '../main.js'
+import { isDebugMode } from '../main.js'
 
 let originalConsoleError // Визначаємо змінну в області видимості, доступній для обох хуків
 let originalConsoleLog // Визначаємо змінну в області видимості, доступній для обох хуків
@@ -18,26 +18,14 @@ afterEach(() => {
   console.log = originalConsoleLog // Відновлюємо console.log
 })
 
-describe('Encoder and Decoder Functions', () => {
-  test('encodeToBase64 correctly encodes multiple arguments', () => {
-    const result = encodeToBase64('hello', 'world')
-    expect(result).toBe(Buffer.from('hello:world').toString('base64'))
+describe('isDebugMode', () => {
+  it('should return true if NODE_ENV is development', () => {
+    process.env.NODE_ENV = 'development'
+    expect(isDebugMode()).toBe(true)
   })
 
-  test('encodeToHex correctly encodes multiple arguments', () => {
-    const result = encodeToHex('hello', 'world')
-    expect(result).toBe(Buffer.from('hello:world').toString('hex'))
-  })
-
-  test('decodeFromBase64 correctly decodes a base64 string', () => {
-    const base64String = Buffer.from('hello:world').toString('base64')
-    const result = decodeFromBase64(base64String)
-    expect(result).toBe('hello:world')
-  })
-
-  test('decodeFromHex correctly decodes a hex string', () => {
-    const hexString = Buffer.from('hello:world').toString('hex')
-    const result = decodeFromHex(hexString)
-    expect(result).toBe('hello:world')
+  it('should return false if NODE_ENV is not development', () => {
+    process.env.NODE_ENV = 'production'
+    expect(isDebugMode()).toBe(false)
   })
 })
