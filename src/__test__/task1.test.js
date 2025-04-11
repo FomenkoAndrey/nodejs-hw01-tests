@@ -1,16 +1,17 @@
 import { isDebugMode } from '../main.js'
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest'
 
 let originalConsoleError // Визначаємо змінну в області видимості, доступній для обох хуків
 let originalConsoleLog // Визначаємо змінну в області видимості, доступній для обох хуків
 
-// Мокуємо `fetch` глобально за допомогою jest
+// Мокуємо `fetch` глобально за допомогою vitest
 beforeEach(() => {
-  jest.resetAllMocks()
+  vi.resetAllMocks()
   originalConsoleError = console.error // Зберігаємо оригінальний console.error
   originalConsoleLog = console.log // Зберігаємо оригінальний console.log
-  console.error = jest.fn() // Приглушаємо console.error
-  console.log = jest.fn() // Приглушаємо console.log
-  global.fetch = jest.fn()
+  console.error = vi.fn() // Приглушаємо console.error
+  console.log = vi.fn() // Приглушаємо console.log
+  global.fetch = vi.fn()
 })
 
 afterEach(() => {
